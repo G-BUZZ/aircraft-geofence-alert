@@ -7,8 +7,19 @@ from datetime import datetime, timezone
 
 # Punto da monitorare.
 # Per portfolio usa un punto pubblico/generico, non coordinate personali sensibili.
-POINT_LAT = float(os.environ.get("POINT_LAT", "38.1157"))
-POINT_LON = float(os.environ.get("POINT_LON", "13.3615"))
+def required_float_env(name: str) -> float:
+    """Read a required float value from an environment variable."""
+    value = os.environ.get(name, "").strip()
+    if not value:
+        raise SystemExit(f"Missing required environment variable: {name}")
+    try:
+        return float(value)
+    except ValueError as exc:
+        raise SystemExit(f"Invalid float value for {name}: {value}") from exc
+
+
+POINT_LAT = required_float_env("POINT_LAT")
+POINT_LON = required_float_env("POINT_LON")
 
 # Quanto lontano scaricare aerei da OpenSky.
 FETCH_RADIUS_KM = float(os.environ.get("FETCH_RADIUS_KM", "120.0"))
@@ -265,7 +276,7 @@ def main():
     print(f"Alert se passaggio entro {ALERT_RADIUS_KM} km nei prossimi {LOOKAHEAD_MINUTES} minuti.")
 
     if NTFY_ENABLED:
-        print(f"Notifiche ntfy: attive sul topic {NTFY_TOPIC}")
+        print("Notifiche ntfy: attive.")
     else:
         print("Notifiche ntfy: disattivate. Imposta NTFY_TOPIC per attivarle.")
 
