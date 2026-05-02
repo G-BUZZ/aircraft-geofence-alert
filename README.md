@@ -94,7 +94,7 @@ The notification topic is read from the `NTFY_TOPIC` environment variable, so no
 
 ## Limitations
 
-The closest-approach estimate is based on current aircraft position, speed, and heading. It does not account for turns, route changes, air traffic control instructions, incomplete data, or delayed API updates.
+Closest-approach estimates are based only on the currently reported position, speed, and heading. They are simplified linear estimates and do not account for flight plans, air traffic control instructions, turns, altitude changes, signal delay, missing data, incomplete data, or delayed API updates.
 
 This project should not be used for aviation safety, operational tracking, surveillance, targeting, or decision-making.
 
@@ -105,3 +105,11 @@ This repository is intended to demonstrate a small defensive OSINT and data auto
 ## License
 
 This project is released under the MIT License.
+
+## API Usage and Terms
+
+This project uses public aircraft state data for educational and portfolio purposes only.
+
+Users are responsible for respecting the terms of the data providers they use, including any rate limits, attribution requirements, non-commercial restrictions, and limitations on operational use.
+
+This project is not intended for commercial use, aviation decision-making, real-time operational tracking, or safety-critical monitoring.
